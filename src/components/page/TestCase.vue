@@ -1,13 +1,7 @@
 <template>
     <div class="table">
-        <!--<div class="crumbs">-->
-            <!--<el-breadcrumb separator="/">-->
-                <!--<el-breadcrumb-item><i class="el-icon-lx-cascades"></i> 基础表格</el-breadcrumb-item>-->
-            <!--</el-breadcrumb>-->
-        <!--</div>-->
         <div class="container">
             <div class="handle-box">
-                <!--<el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>-->
                 <el-select v-model="select_project" filterable placeholder="请选择项目" @select="getTableData" @change="getTableData">
                     <el-option
                         v-for="item in project_options"
@@ -16,19 +10,13 @@
                         :value="item.value">
                     </el-option>
                 </el-select>
-                <el-input v-model="search_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
+                <el-input v-model="search_word" placeholder="筛选关键词" class="handle-input"></el-input>
                 <el-button type="primary" icon="search" @click="search">搜索</el-button>
             </div>
             <el-table :data="tableData" :span-method="spanMethod" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
-                <!--<el-table-column type="selection" width="55" align="center"></el-table-column>-->
-                <!--<el-table-column prop="project" label="项目名称" sortable width="150">-->
-                <!--</el-table-column>-->
                 <el-table-column prop="case_name" label="用例名称" width="150">
                 </el-table-column>
                 <el-table-column prop="index" label="执行顺序" width="80" align="center">
-                    <!--<template slot-scope="scope">-->
-                        <!--<el-input-number>{{scope.row.index}}</el-input-number>-->
-                    <!--</template>-->
                 </el-table-column>
                 <el-table-column prop="api_name" label="接口名称" width="200">
                 </el-table-column>

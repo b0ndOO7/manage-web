@@ -2,11 +2,13 @@ import axios from "axios";
 import qs from "qs";
 import router from "../router"
 import { Message } from "element-ui"
+import { apiUrl } from "static/js/config.js"
 
 
 /****** 创建axios实例 ******/
 const service = axios.create({
-    baseURL: 'http://test.manage.com/api',  // api的base_url
+    // baseURL: 'https://autotest.v11v.ml/api',  // api的base_url
+    baseURL: apiUrl,  // api的base_url
     timeout: 10000,  // 请求超时时间10s
     responseType: "json",
     headers: {

@@ -26,8 +26,8 @@
             <el-col :span="20" >
                 <div class="container">
                     <div class="handle-box">
-                        <el-button type="primary" icon="delete" class="handle-del mr10" @click="delMore">批量删除</el-button>
-                        <el-input v-model="search_word" placeholder="筛选接口关键词" class="handle-input mr10" clearable></el-input>
+                        <el-button type="primary" icon="delete" class="handle-del" @click="delMore">批量删除</el-button>
+                        <el-input v-model="search_word" placeholder="筛选接口关键字" class="handle-input" clearable></el-input>
                         <el-button type="primary" icon="search" @click="search">搜索</el-button>
                         <el-button type="primary" @click="addRecord">添加接口</el-button>
                     </div>

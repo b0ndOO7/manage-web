@@ -7,12 +7,12 @@
         </div>
         <div class="container">
             <div class="handle-box">
-                <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">删除项目</el-button>
+                <el-button type="primary" icon="delete" class="handle-del" @click="delAll">删除项目</el-button>
                 项目名称:
-                <el-input v-model="search_word" placeholder="输入要查询的项目关键词" class="handle-input mr10"></el-input>
+                <el-input v-model="search_word" placeholder="输入要查询的项目关键词" class="handle-input"></el-input>
                 <el-button type="primary" icon="search" @click="search">搜索</el-button>
-                <el-button type="primary" icon="add" class="handle-del mr10" @click="addProject">新增项目</el-button>
-                <el-button type="primary" icon="add" class="handle-del mr10" @click="addVersion">新增版本</el-button>
+                <el-button type="primary" icon="add" class="handle-del" @click="addProject">新增项目</el-button>
+                <el-button type="primary" icon="add" class="handle-del" @click="addVersion">新增版本</el-button>
             </div>
             <!--列表-->
             <el-table :data="data" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
