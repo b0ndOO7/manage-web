@@ -60,6 +60,7 @@
         }
     }
 </script>
+
 <style scoped>
     .editor-btn{
         margin-top: 20px;

@@ -8,9 +8,9 @@
 
         <el-row :gutter="5">
             <el-col :span="4" >
-                <div class="container">
+                <div>
                     <el-card shadow="hover" :body-style="{padding: '0px'}" >
-                        <div slot="header" class="clearfix">
+                        <div slot="header">
                             <span align="center">项目列表|模块(todo)</span>
                         </div>
                         <el-tree v-loading="tree_loading" ref="project_tree"
@@ -26,7 +26,7 @@
             <el-col :span="20" >
                 <div class="container">
                     <div class="handle-box">
-                        <el-button type="primary" icon="delete" class="handle-del" @click="delMore">批量删除</el-button>
+                        <el-button type="primary" @click="delMore">批量删除</el-button>
                         <el-input v-model="search_word" placeholder="筛选接口关键字" class="handle-input" clearable></el-input>
                         <el-button type="primary" icon="search" @click="search">搜索</el-button>
                         <el-button type="primary" @click="addRecord">添加接口</el-button>
@@ -120,7 +120,7 @@
         <!-- 批量删除提示框 -->
         <el-dialog title="提示" :visible.sync="delMoreVisible" width="320px" center>
             <div class="del-dialog-cnt">删除不可恢复，是否确定批量删除？</div>
-            <span slot="footer" class="dialog-footer">
+            <span slot="footer">
                 <el-button @click="delMoreVisible = false">取 消</el-button>
                 <el-button type="primary" @click="deleteMore">确 定</el-button>
             </span>
@@ -129,7 +129,7 @@
 
         <!-- 测试用例调式、模板界面 -->
         <el-dialog title="接口调试" :visible.sync="debugVisible" :close-on-click-modal="false" center>
-            <el-form ref="form" class="form" :model="ruleForm">
+            <el-form ref="form" :model="ruleForm">
                 <el-row :gutter="5">
                     <el-card shadow="always">
                         <div slot="header">
@@ -161,7 +161,7 @@
                 <el-row :gutter="1">
                     <el-col :span="12">
                         <el-card shadow="always">
-                            <div slot="header" class="clearfix">
+                            <div slot="header">
                                 <span>请求数据</span>
                             </div>
                             <el-collapse v-model="activeName">
@@ -248,7 +248,7 @@
                     </el-col>
                     <el-col :span="12">
                         <el-card shadow="always" :span="12">
-                            <div slot="header" class="clearfix">
+                            <div slot="header">
                                 <span>响应结果</span>
                             </div>
                             <span>响应状态：{{ruleForm.resp_status}}</span>
@@ -706,13 +706,9 @@
 
 </script>
 
-<style>
+<style scoped>
     .handle-box {
         margin-bottom: 20px;
-    }
-
-    .handle-select {
-        width: 120px;
     }
 
     .handle-input {
@@ -726,17 +722,6 @@
     .table{
         width: 100%;
         font-size: 14px;
-    }
-    .red{
-        color: #ff0000;
-    }
-
-    .cell-edit-input {
-        width: 100px;
-    }
-
-    .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
-        background-color: #4288ff;
     }
 
     .form .half-left {

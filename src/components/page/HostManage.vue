@@ -266,27 +266,22 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
     .template-manage {
         width: 100%;
         font-size: 14px;
-        .temp-title {
+    }
+    .temp-title {
             display: flex;
             justify-content: space-between;
             height: 30px;
             margin-top: 20px;
-        }
-        .temp-title td{
-            height: 45px;
-        }
-        .el-table {
-            background-color: #f7f7f7;
-            margin-top: 20px;
-            th>.cell {
-                text-align: center !important;
-            }
-        }
     }
+    .temp-title td{
+        height: 45px;
+    }
+
+
 
     .table {
         width: 100%;

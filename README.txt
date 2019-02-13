@@ -18,7 +18,16 @@ manage-web项目需配合使用 api_auto_test_platform<https://github.com/b0ndOO
 
 
 体验地址：
+https://autotest.v11v.ml
+
+注：家里路由做为服务器，会存在不稳定情况，待有时间、精力，重新申请域名、vps搭建稳定环境
+若有幸你能访问该网址，请一定要轻虐，家庭router搞不住逛XX
 
 
 开发环境搭建：
 // todo
+
+
+踩坑记录：
+20190213：npm run build打包部署后，自定义样式不起效；
+          解决方法：修改main.js中css文件 import顺序

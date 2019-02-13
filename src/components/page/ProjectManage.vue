@@ -465,8 +465,4 @@
         width: 100%;
         font-size: 14px;
     }
-
-    .red {
-        color: #ff0000;
-    }
 </style>

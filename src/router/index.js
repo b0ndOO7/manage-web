@@ -29,12 +29,12 @@ export default new Router({
                     ]
                 },
                 {
-                    path: '/project/list',
+                    path: '/projects',
                     component: resolve => require(['../components/page/ProjectManage.vue'], resolve),
                     meta: { title: '项目列表' }
                 },
                 {
-                    path: '/project/myproject',
+                    path: '/modules',
                     component: resolve => require(['../components/page/ModulesHome.vue'], resolve),
                     meta: { title: '功能模块' }
                 },
@@ -46,19 +46,24 @@ export default new Router({
                     meta: { title: '测试管理' }
                 },
                 {
-                    path: '/testmanage/hosts',
+                    path: '/hostmanage',
                     component: resolve => require(['../components/page/HostManage.vue'], resolve),
                     meta: { title: 'HOST配置' }
                 },
                 {
-                    path: '/testmanage/apilist',
+                    path: '/apimanage',
                     component: resolve => require(['../components/page/APIManage.vue'], resolve),
                     meta: { title: '接口管理' }
                 },
                 {
-                    path: '/testmanage/testcase',
+                    path: '/testcase',
                     component: resolve => require(['../components/page/TestCase.vue'], resolve),
                     meta: { title: '测试用例' }
+                },
+                {
+                    path: '/testsuit',
+                    component: resolve => require(['../components/page/TestCase.vue'], resolve),
+                    meta: { title: '测试集' }
                 },
 
 

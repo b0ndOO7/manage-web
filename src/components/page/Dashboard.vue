@@ -231,10 +231,6 @@
 
 
 <style scoped>
-    .el-row {
-        margin-bottom: 20px;
-    }
-
     .grid-content {
         display: flex;
         align-items: center;
@@ -328,11 +324,6 @@
 
     .todo-item {
         font-size: 14px;
-    }
-
-    .todo-item-del {
-        text-decoration: line-through;
-        color: #999;
     }
 
     .schart {

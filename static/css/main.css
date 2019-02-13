@@ -171,3 +171,7 @@ a {
 .v-note-wrapper .v-note-panel {
     min-height: 500px;
 }
+
+.red{
+    color: #ff0000;
+}
