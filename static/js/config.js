@@ -1,3 +1,3 @@
-var apiUrl = 'https://autotest.v11v.ml/api';
+var apiUrl = 'http://test.manage.com/api';
 
 export { apiUrl }

@@ -94,12 +94,10 @@
                     </template>
                 </el-table-column>
             </el-table>
-            <div class="pagination">
-                <el-pagination background @current-change="handleCurrentChange" layout="prev, pager, next" :total="totalRow">
-                </el-pagination>
-            </div>
-
-
+            <!--<div class="pagination">-->
+                <!--<el-pagination background @current-change="handleCurrentChange" layout="prev, pager, next" :total="totalRow">-->
+                <!--</el-pagination>-->
+            <!--</div>-->
         </div>
     </div>
 </template>
@@ -180,7 +178,7 @@
             // 保存
             handleSave ($index, row) {
                 let record = this.showData[$index];
-                this.$set(record, 'editFlag', false)
+                this.$set(record, 'editFlag', false);
                 // localStorage.setItem('tableData', JSON.stringify(this.showData))
                 let params = {uid: this.uid, id: record.id, ip: record.ip, projectId: record.projectId, version: record.version, domain: record.domain};
                 saveProjectHost(params).then(response => {

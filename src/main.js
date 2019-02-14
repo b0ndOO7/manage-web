@@ -1,10 +1,10 @@
-import '../static/css/icon.css';
 import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
 import Vue from 'vue';
 import App from './App';
 import axios from 'axios';
 import ElementUI from 'element-ui';
+import '../static/css/icon.css';
 import './components/common/directives';
 import "babel-polyfill";
 import router from './router';

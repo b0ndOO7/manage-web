@@ -207,8 +207,6 @@
                     version: '',
                     remark: ''
                 },
-
-
                 options: [{label: "web", value: "web"}, {label: "app", value: "app"}]
             }
         },
@@ -412,15 +410,6 @@
                     this.$message.error(error);
                 });
             },
-
-
-
-
-
-
-
-
-
 
             querySearch(queryString, cb) {
                 let projects = [];

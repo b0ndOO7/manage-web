@@ -13,14 +13,14 @@
                         <div slot="header">
                             <span align="center">项目列表|模块(todo)</span>
                         </div>
-                        <el-tree v-loading="tree_loading" ref="project_tree"
+                        <el-tree v-loading="tree_loading"
                                  :data="projects"
                                  node-key="id"
                                  :highlight-current="true"
                                  accordion
                                  @node-click="handleCheckChange">
                         </el-tree>
-                </el-card>
+                    </el-card>
                 </div>
             </el-col>
             <el-col :span="20" >
