@@ -5,7 +5,7 @@
                 <div>
                     <el-card shadow="hover" :body-style="{padding: '0px'}" >
                         <div slot="header">
-                            <el-select v-model="select_project" filterable placeholder="请选择项目" @change="getModule">
+                            <el-select v-model="select_project" filterable placeholder="请选择项目" @change="getModule" size="medium">
                                 <el-option
                                     v-for="item in project_options"
                                     :key="item.value"
@@ -66,11 +66,14 @@
                 <el-form-item label="用例名称:">
                     <el-input v-model="caseForm.case_name"></el-input>
                 </el-form-item>
+                <!--<el-form-item label="所属模块:">-->
+                    <!--<el-select v-model="caseForm.module_id" placeholder="请选择">-->
+                        <!--<el-option v-for="item in modules" :key="item.id" :label="item.module" :value="item.id">-->
+                        <!--</el-option>-->
+                    <!--</el-select>-->
+                <!--</el-form-item>-->
                 <el-form-item label="所属模块:">
-                    <el-select v-model="caseForm.module_id" placeholder="请选择">
-                        <el-option v-for="item in modules" :key="item.id" :label="item.module" :value="item.id">
-                        </el-option>
-                    </el-select>
+                    <select-tree v-model="caseForm.module_id" :options="modules" :props="moduleProps" width="200" @select="selectTreeChange"/>
                 </el-form-item>
                 <el-form-item label="描述:">
                     <el-input type="textarea" :rows="6" v-model="caseForm.case_desc"></el-input>
@@ -93,9 +96,11 @@
 </template>
 
 <script>
+    import SelectTree from '../common/SelectTree'
     import { getAllUserProjectList, getTestCaseByPid, getModuleByPid,saveCaseByModuleId } from '../../scripts/api'
     export default {
         name: 'basetable',
+        components: {SelectTree},
         data() {
             return {
                 project_options: [],
@@ -112,11 +117,19 @@
                 is_search: false,
                 caseDialogVisible: false,
                 caseForm: {
+                    case_id: '',
                     case_name:'',
                     module_id:'',
                     case_desc:''
                 },
                 delVisible: false,
+                // 数据默认字段
+                moduleProps: {
+                    parent: 'parentid',   // 父级唯一标识
+                    value: 'id',          // 唯一标识
+                    label: 'label',       // 标签显示
+                    children: 'children', // 子级
+                },
 
                 idx: -1,
                 pos: 0
@@ -206,10 +219,10 @@
                 console.log(row);
             },
             handleEdit(index, row) {
-                console.log(this.caseForm);
+                this.caseForm.case_id = row.id;
                 this.caseForm.case_name = row.case_name;
                 this.caseForm.case_desc = row.case_desc;
-                this.caseForm.module_id = this.select_module;
+                this.caseForm.module_id = row.module_id;
                 this.caseDialogVisible = true;
             },
             handleDelete(index, row) {
@@ -231,16 +244,17 @@
             },
             // 保存编辑
             saveEdit() {
-                console.log(this.caseForm);
-                this.caseDialogVisible = false;
+                let params = { caseId: this.caseForm.case_id, caseName: this.caseForm.case_name, caseDesc:this.caseForm.case_desc, projectId: this.select_project, moduleId: this.caseForm.module_id};
                 saveCaseByModuleId(params).then(response => {
                     let code = response.code;
                     let msg = response.msg;
                     if (code == 200) {
-                        this.$message.success('保存成功')
+                        this.$message.success('保存成功');
+                        this.getTableData();
                     } else {
                         this.$message.error(msg.trim());
                     }
+                    this.caseDialogVisible = false;
                 }).catch(error => {
                     this.$message.error(error);
                 });
@@ -253,6 +267,10 @@
             },
             delMore() {
                 // this.delMoreVisible = true;
+            },
+            selectTreeChange(item) {
+                console.log('selectTreeChange')
+                console.log(item)
             }
         }
     }
