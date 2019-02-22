@@ -331,7 +331,6 @@
             }
         },
         created() {
-            // this.getApiList();
             this.getProjectAndModule();
         },
         computed: {
@@ -584,7 +583,7 @@
                 });
             },
             addRecord () {
-                this.tableData = this.tableData || []
+                // this.tableData = this.tableData || [];
                 this.tableData.push({
                     id:'',
                     project_id: '',

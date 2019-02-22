@@ -25,17 +25,21 @@ export const getProjectsByUid = data => { return service({ url: `/testcase/getpr
 
 export const saveProjectHost = data => { return service({ url: `/testcase/savehost`, method: 'post', data })};
 export const deleteProjectHost = data => { return service({ url: `/testcase/deletehost`, method: 'post', data })};
-   //api相关
-export const getUserApiList = data => { return service({ url: `/testcase/getapilist`, method: 'post', data })};
-export const saveTestApi = data => { return service({ url: `/testcase/savetestapi`, method: 'post', data })};
-export const getTestApiInfo = data => { return service({ url: `/testcase/getapiinfo`, method: 'post', data })};
-export const saveTestApiInfo = data => { return service({ url: `/testcase/saveapiinfo`, method: 'post', data })};
-export const deleteTestApi = data => { return service({ url: `/testcase/deletetestapi`, method: 'post', data })};
-export const changeTestApiStatus = data => { return service({ url: `/testcase/changeapistatus`, method: 'post', data })};
+//api相关
+export const getUserApiList = data => { return service({ url: `/testapi/getlist`, method: 'post', data })};
+export const saveTestApi = data => { return service({ url: `/testapi/savetestapi`, method: 'post', data })};
+export const getTestApiInfo = data => { return service({ url: `/testapi/getapiinfo`, method: 'post', data })};
+export const saveTestApiInfo = data => { return service({ url: `/testapi/saveapiinfo`, method: 'post', data })};
+export const deleteTestApi = data => { return service({ url: `/testapi/deletetestapi`, method: 'post', data })};
+export const changeTestApiStatus = data => { return service({ url: `/testapi/changeapistatus`, method: 'post', data })};
+export const getApiByProjectId = data => { return service({ url: `/testapi/getapibypid`, method: 'post', data })};
+
+export const debugTestApi = data => { return service({ url: `/testapi/debugtestapi`, method: 'post', data })};
 
 //测试用例相关
 export const saveCaseByModuleId = data => { return service({ url: `/testcase/savecase`, method: 'post', data })};
+export const getCaseStepsByCaseId = data => { return service({ url: `/testcase/getsteps`, method: 'post', data })};
 
-export const debugTestApi = data => { return service({ url: `/testcase/debugtestapi`, method: 'post', data })};
+
 
 

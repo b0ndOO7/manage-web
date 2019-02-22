@@ -27,13 +27,12 @@
                 </div>
             </el-col>
 
-
             <el-col :span="20" >
                 <div class="container">
                     <div class="handle-box">
                         <el-button type="primary" @click="delMore">批量删除</el-button>
                         <el-input v-model="search_word" placeholder="筛选关键词" class="handle-input"></el-input>
-                        <el-button type="primary" icon="search" @click="search">搜索</el-button>
+                        <el-button type="primary" icon="search" @click="search">项目中搜索</el-button>
 
                         <el-button type="primary" icon="add" @click="addTestCase">新增用例</el-button>
                     </div>
@@ -61,17 +60,11 @@
         </el-row>
 
         <!--用例编辑框-->
-        <el-dialog title="测试用例" :visible.sync="caseDialogVisible" style="width: 70%; left: 10%">
+        <el-dialog title="测试用例" :visible.sync="caseDialogVisible" style="width: 60%; left: 10%" :close-on-click-modal="false" center>
             <el-form ref="form" :model="caseForm" label-width="90px">
                 <el-form-item label="用例名称:">
                     <el-input v-model="caseForm.case_name"></el-input>
                 </el-form-item>
-                <!--<el-form-item label="所属模块:">-->
-                    <!--<el-select v-model="caseForm.module_id" placeholder="请选择">-->
-                        <!--<el-option v-for="item in modules" :key="item.id" :label="item.module" :value="item.id">-->
-                        <!--</el-option>-->
-                    <!--</el-select>-->
-                <!--</el-form-item>-->
                 <el-form-item label="所属模块:">
                     <select-tree v-model="caseForm.module_id" :options="modules" :props="moduleProps" width="200" @select="selectTreeChange"/>
                 </el-form-item>
@@ -92,14 +85,39 @@
                 <el-button type="primary" @click="deleteRow">确 定</el-button>
             </span>
         </el-dialog>
+
+        <!--测试步骤-->
+        <el-dialog title="测试步骤" :visible.sync="testStepsVisible" style="width: 90%" :close-on-click-modal="false" center>
+            <el-form ref="form" :model="stepForm">
+                <el-row :gutter="5">
+                    <el-card shadow="always">
+                        <div slot="header">
+                            <span style="font-weight:bold">{{stepForm.caseName}}</span>
+                        </div>
+                        <el-col>
+                            <el-form-item>
+                                <div>{{stepForm.caseDesc}}</div>
+                            </el-form-item>
+                        </el-col>
+                    </el-card>
+                </el-row>
+                <el-row>
+                    <el-table :data="stepForm.stepTable" border class="table" >
+                        <el-table-column prop="index" label="序号" width="50"/>
+                        <el-table-column prop="api_name" label="接口名称" width="150"/>
+                    </el-table>
+
+                </el-row>
+            </el-form>
+        </el-dialog>
     </div>
 </template>
 
 <script>
     import SelectTree from '../common/SelectTree'
-    import { getAllUserProjectList, getTestCaseByPid, getModuleByPid,saveCaseByModuleId } from '../../scripts/api'
+    import { getAllUserProjectList, getTestCaseByPid, getModuleByPid, saveCaseByModuleId, getCaseStepsByCaseId } from '../../scripts/api'
     export default {
-        name: 'basetable',
+        name: 'TestCase',
         components: {SelectTree},
         data() {
             return {
@@ -107,6 +125,7 @@
                 modules:[],
                 tableData: [],
                 select_project:'',
+                select_projectName:'',
                 select_module:'',
                 search_word: '',
                 cur_page: 1,
@@ -130,6 +149,14 @@
                     label: 'label',       // 标签显示
                     children: 'children', // 子级
                 },
+                //测试步骤相关
+                testStepsVisible: false,
+                stepForm: {
+                    caseName: '',
+                    caseDesc: '',
+                    stepTable: '',
+                    stepData: ''
+                },
 
                 idx: -1,
                 pos: 0
@@ -150,7 +177,7 @@
                 this.select_module = item.id;
                 this.getTableData();
             },
-            getModule() {
+            getModule(selVal) {
                 this.modules = [];
                 let params = { id: this.select_project };
                 getModuleByPid(params).then(response => {
@@ -179,7 +206,6 @@
                     } else {
                         this.$message.error(msg.trim());
                     }
-                    this.select_module = '';
                 }).catch(error => {
                     this.$message.error(error);
                 });
@@ -206,17 +232,53 @@
                 });
             },
 
-            addTestCase() {
-
-            },
-
             search() {
                 this.is_search = true;
-                this.getTableData();
+                this.select_module = '',
+                    this.getTableData();
+            },
+
+            addTestCase() {
+                this.caseForm.case_id = '';
+                this.caseForm.case_name = '';
+                this.caseForm.case_desc = '';
+                this.caseForm.module_id = this.select_module;
+                this.caseDialogVisible = true;
             },
 
             testSteps(index, row) {
-                console.log(row);
+                // console.log(this.project_options);
+                // console.log(this.select_project);
+                this.project_options.forEach(item=>{
+                    if (item.value === this.select_project) {
+                        this.select_projectName = item.label;
+                    }
+                });
+                this.$router.push({
+                    path: '/testcase/step',
+                    query: {
+                        projectId: this.select_project,
+                        projectName: this.select_projectName,
+                        caseId: row.id,
+                        caseName: row.case_name
+                    }
+                });
+                console.log('done')
+                // this.stepForm.caseName = row.case_name;
+                // this.stepForm.caseDesc = row.case_desc;
+                // let params = { caseId: row.id, projectId: row.project_id, moduleId: row.module_id};
+                // getCaseStepsByCaseId(params).then(response => {
+                //     let code = response.code;
+                //     let msg = response.msg;
+                //     if (code == 200) {
+                //         this.stepForm.stepTable = response.data;
+                //     } else {
+                //         this.$message.error(msg.trim());
+                //     }
+                //     this.testStepsVisible = true;
+                // }).catch(error => {
+                //     this.$message.error(error);
+                // });
             },
             handleEdit(index, row) {
                 this.caseForm.case_id = row.id;

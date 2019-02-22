@@ -58,13 +58,24 @@ export default new Router({
                 {
                     path: '/testcase',
                     component: resolve => require(['../components/page/TestCase.vue'], resolve),
-                    meta: { title: '测试用例' }
+                    meta: { title: '测试用例' },
+                    children:[]
                 },
+                {
+                    name: '测试步骤',
+                    path: '/testcase/step',
+                    component: resolve => require(['../components/page/TestCaseInfo.vue'], resolve),
+                    meta: { title: '测试步骤' },
+
+                },
+
+
                 {
                     path: '/testsuit',
                     component: resolve => require(['../components/page/TestCase.vue'], resolve),
                     meta: { title: '测试集' }
                 },
+
 
 
 
