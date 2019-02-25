@@ -39,6 +39,8 @@ export const debugTestApi = data => { return service({ url: `/testapi/debugtesta
 //测试用例相关
 export const saveCaseByModuleId = data => { return service({ url: `/testcase/savecase`, method: 'post', data })};
 export const getCaseStepsByCaseId = data => { return service({ url: `/testcase/getsteps`, method: 'post', data })};
+export const saveCaseStepsByCaseId = data => { return service({ url: `/testcase/savesteps`, method: 'post', data })};
+export const getCaseStepDataById = data => { return service({ url: `/testcase/getstepdata`, method: 'post', data })};
 
 
 

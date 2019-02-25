@@ -42,7 +42,7 @@ export default new Router({
 
                 {
                     path: '/testmanage',
-                    component: resolve => require(['../components/page/BaseTable.vue'], resolve),
+                    component: resolve => require(['../components/page/HostManage.vue'], resolve),
                     meta: { title: '测试管理' }
                 },
                 {
